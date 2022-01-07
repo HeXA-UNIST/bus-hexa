@@ -1,9 +1,10 @@
 from typing import Any, Dict
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 # from django.http import HttpResponse, JsonResponse
 from django.views.generic import TemplateView
 from .tools.tools import *
 from .tools.helpers import *
+from django.utils.cache import add_never_cache_headers
 
 class TimeTableMixin:
     """
@@ -25,6 +26,14 @@ class TimeBasedBusListView(TemplateView, TimeTableMixin):
         context = super().get_context_data(**kwargs)
         context.update(self.get_timetable_context())
         return context
+
+    def dispatch(self, *args, **kwargs):
+        response = super(TimeBasedBusListView, self).dispatch(*args, **kwargs)
+        response["Cache-Control"] = "no-cache, no-store, max-age=0"
+        response["Pragma"] = "no-cache"
+        response["Expires"] = "-1"
+        return response
+
 
 class BusInfoMixin:
     STOP_ID = "196040234"
