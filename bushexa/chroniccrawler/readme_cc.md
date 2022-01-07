@@ -13,6 +13,12 @@ postgresql 설치 (apt)
 
 root_of_repo/chroniccrawler/crawler/tools/key.txt를 생성해 key를 넣어주세요.
 
+### memcached 설치 후 실행하기
+
+```
+sudo service memcached start
+```
+
 ### postgresql 설치 후 실행하기
 
 ```
