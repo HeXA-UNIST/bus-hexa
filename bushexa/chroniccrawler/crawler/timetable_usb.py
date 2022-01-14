@@ -1,3 +1,5 @@
+from django.db import transaction
+
 from .tools.getkey import get_key
 from .tools.requestor import request_dicts
 from .tools.listifier import element_list
@@ -27,7 +29,7 @@ def ready_request(lanes, dayOfWeek):
 
     return lane_url_params
 
-
+@transaction.atomic
 def store_time_table(lane, info):
     ## structure of resdict :
     # resdict - tableInfo - pageno, numofrows, totalcnt, resultcode, resultmsg

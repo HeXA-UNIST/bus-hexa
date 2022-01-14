@@ -1,5 +1,7 @@
 import itertools
 
+from django.db import transaction
+
 from .tools.getkey import get_key
 from .tools.requestor import request_dicts
 from .tools.listifier import element_list
@@ -28,7 +30,7 @@ def ready_request(lanes):
 
     return lane_url_params
 
-
+@transaction.atomic
 def store_lane_info(lane, info):
     new_nodes = info
     original_nodes = NodeOfLane.objects.filter(route_key=lane).order_by('node_order')

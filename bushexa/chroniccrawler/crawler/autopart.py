@@ -1,3 +1,5 @@
+from django.db import transaction
+
 from chroniccrawler.models import LaneToTrack, NodeOfLane, PartOfLane, UlsanBus_NodeToTrack
 
 
@@ -76,7 +78,7 @@ def make_parts(groups):
 
     return 0
 
-
+@transaction.atomic
 def do_lanepart():
     lanes = get_all_nodes_to_check()
 
