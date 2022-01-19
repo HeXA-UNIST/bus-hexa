@@ -119,5 +119,10 @@ class IndividualLaneView(DetailView, TemplateResponseMixin):
         return context
 
 
+class FromToView(TemplateView):
+    
+    template_name = "timetable/fromto.html"
+
+
 def index(request):
     return redirect('busno')
